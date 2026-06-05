@@ -2,26 +2,16 @@
 import type { MotionInfo } from 'easy-live2d'
 
 import { emit } from '@tauri-apps/api/event'
-import { Empty, Modal, Segmented } from 'antdv-next'
+import { Button, Empty, Modal, Segmented } from 'antdv-next'
 import { isEmpty } from 'es-toolkit/compat'
 import { ref } from 'vue'
 
 import { LISTEN_KEY } from '@/constants'
 import { useModelStore } from '@/stores/model'
 
-import BehaviorItem from './components/behavior-item/index.vue'
-
 const modelValue = defineModel<boolean>()
 const modelStore = useModelStore()
 const value = ref<'motion' | 'expression'>('motion')
-
-function getMotionShortcutId(groupName: string, index: number) {
-  return `${modelStore.currentModel?.id}:motion:${groupName}:${index}`
-}
-
-function getExpressionShortcutId(index: number) {
-  return `${modelStore.currentModel?.id}:expression:${index}`
-}
 
 function startMotion(motion: MotionInfo) {
   emit(LISTEN_KEY.START_MOTION, motion)
@@ -74,11 +64,18 @@ function setExpression(index: number) {
               v-for="(item, index) in motions"
               :key="item.no"
             >
-              <BehaviorItem
-                v-model="modelStore.shortcuts[getMotionShortcutId(groupName, index)]"
-                :label="$t('pages.preference.model.behaviorModal.labels.motionIndex', { index: index + 1 })"
-                @click="startMotion(item)"
-              />
+              <div class="flex items-center justify-between px-4 py-2 not-last:(b-b b-b-solid b-border-sec)">
+                <span>{{ $t('pages.preference.model.behaviorModal.labels.motionIndex', { index: index + 1 }) }}</span>
+
+                <Button
+                  class="inline-flex items-center justify-center"
+                  @click="startMotion(item)"
+                >
+                  <template #icon>
+                    <div class="i-lucide:play" />
+                  </template>
+                </Button>
+              </div>
             </template>
           </div>
         </div>
@@ -99,11 +96,18 @@ function setExpression(index: number) {
           v-for="(item, index) in modelStore.currentExpressions"
           :key="item.name"
         >
-          <BehaviorItem
-            v-model="modelStore.shortcuts[getExpressionShortcutId(index)]"
-            :label="$t('pages.preference.model.behaviorModal.labels.expressionIndex', { index: index + 1 })"
-            @click="setExpression(index)"
-          />
+          <div class="flex items-center justify-between px-4 py-2 not-last:(b-b b-b-solid b-border-sec)">
+            <span>{{ $t('pages.preference.model.behaviorModal.labels.expressionIndex', { index: index + 1 }) }}</span>
+
+            <Button
+              class="inline-flex items-center justify-center"
+              @click="setExpression(index)"
+            >
+              <template #icon>
+                <div class="i-lucide:play" />
+              </template>
+            </Button>
+          </div>
         </template>
       </div>
     </div>

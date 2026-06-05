@@ -15,7 +15,6 @@ import About from './components/about/index.vue'
 import Cat from './components/cat/index.vue'
 import General from './components/general/index.vue'
 import Model from './components/model/index.vue'
-import Shortcut from './components/shortcut/index.vue'
 
 useTray()
 const appStore = useAppStore()
@@ -47,12 +46,6 @@ const menus = computed(() => [
     label: t('pages.preference.model.title'),
     icon: 'i-solar:magic-stick-3-bold',
     component: Model,
-  },
-  {
-    key: 'shortcut',
-    label: t('pages.preference.shortcut.title'),
-    icon: 'i-solar:keyboard-bold',
-    component: Shortcut,
   },
   {
     key: 'about',

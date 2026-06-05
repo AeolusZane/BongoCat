@@ -13,8 +13,7 @@
         "labels": {
           "modelSettings": "Configurações do Modelo",
           "mirrorMode": "Modo Espelho",
-          "mouseMirror": "Espelho do Mouse",
-          "ignoreMouse": "Ignorar Eventos do Mouse",
+
           "windowSettings": "Configurações da Janela",
           "passThrough": "Janela Transparente",
           "alwaysOnTop": "Sempre no Topo",
@@ -24,21 +23,17 @@
           "opacity": "Opacidade",
           "motionSound": "Som de Ação",
           "behavior": "Movimentos e Expressões",
-          "autoReleaseDelay": "Atraso de Liberação Automática",
           "hideOnHover": "Ocultar ao Passar o Mouse",
           "maxFPS": "Taxa Máxima de Quadros"
         },
         "hints": {
           "mirrorMode": "Quando ativado, o modelo será invertido horizontalmente.",
-          "mouseMirror": "Quando ativado, o mouse espelhará o movimento da mão.",
-          "ignoreMouse": "Quando ativado, o modelo não responderá a eventos do mouse. Útil para o modo teclado ou modo controle.",
           "motionSound": "Quando ativado, o modelo reproduzirá efeitos sonoros correspondentes ao executar ações (se existirem).",
           "behavior": "Quando ativado, movimentos e expressões podem ser configurados e acionados.",
           "passThrough": "Quando ativado, a janela não afetará operações em outros aplicativos.",
           "alwaysOnTop": "Quando ativado, a janela sempre ficará acima de outros aplicativos.",
           "keepInScreen": "Quando ativado, a janela permanece automaticamente dentro dos limites da tela.",
           "windowSize": "Mova o mouse para a borda da janela ou segure Shift e arraste com o botão direito para redimensionar.",
-          "autoReleaseDelay": "Devido ao Windows não capturar eventos de liberação de certas teclas de nível do sistema, elas serão automaticamente tratadas como liberadas após um tempo limite.",
           "hideOnHover": "Quando ativado, a janela se oculta automaticamente ao passar o mouse. Você pode definir um atraso; 0 significa ocultar imediatamente.",
           "maxFPS": "Limitar a taxa máxima de quadros para renderização do modelo. Reduzir a taxa de quadros pode diminuir o uso de CPU/GPU."
         }
@@ -112,23 +107,6 @@
           }
         }
       },
-      "shortcut": {
-        "title": "Atalhos",
-        "labels": {
-          "toggleCat": "Mostrar/Ocultar Gato",
-          "togglePreferences": "Abrir Preferências",
-          "mirrorMode": "Modo Espelho",
-          "passThrough": "Janela Transparente",
-          "alwaysOnTop": "Sempre no Topo"
-        },
-        "hints": {
-          "toggleCat": "Alternar a visibilidade da janela do gato.",
-          "togglePreferences": "Alternar a visibilidade da janela de preferências.",
-          "mirrorMode": "Alternar o modo espelho do gato.",
-          "passThrough": "Alternar se a janela do gato é clicável.",
-          "alwaysOnTop": "Alternar se a janela do gato permanece no topo."
-        }
-      },
       "about": {
         "title": "Sobre",
         "labels": {
@@ -151,12 +129,6 @@
     }
   },
   "components": {
-    "shortcut": {
-      "hints": {
-        "pressRecordShortcut": "Pressione as teclas para gravar atalho",
-        "clickRecordShortcut": "Clique para gravar atalho"
-      }
-    },
     "updateApp": {
       "title": "Nova versão encontrada 🥳",
       "labels": {

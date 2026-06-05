@@ -4,17 +4,12 @@ import type { MotionInfo } from 'easy-live2d'
 import { convertFileSrc } from '@tauri-apps/api/core'
 import { PhysicalSize } from '@tauri-apps/api/dpi'
 import { Menu, PredefinedMenuItem } from '@tauri-apps/api/menu'
-import { sep } from '@tauri-apps/api/path'
 import { getCurrentWebviewWindow } from '@tauri-apps/api/webviewWindow'
-import { exists, readDir } from '@tauri-apps/plugin-fs'
 import { useDebounceFn, useEventListener } from '@vueuse/core'
 import { round } from 'es-toolkit'
-import { nth } from 'es-toolkit/compat'
 import { onMounted, onUnmounted, ref, watch } from 'vue'
 
 import { useAppMenu } from '@/composables/useAppMenu'
-import { useDevice } from '@/composables/useDevice'
-import { useGamepad } from '@/composables/useGamepad'
 import { useModel } from '@/composables/useModel'
 import { useTauriListen } from '@/composables/useTauriListen'
 import { LISTEN_KEY } from '@/constants'
@@ -22,24 +17,21 @@ import { hideWindow, setAlwaysOnTop, setTaskbarVisibility, showWindow } from '@/
 import { useCatStore } from '@/stores/cat'
 import { useGeneralStore } from '@/stores/general.ts'
 import { useModelStore } from '@/stores/model'
-import { isImage } from '@/utils/is'
 import live2d from '@/utils/live2d'
-import { join } from '@/utils/path'
 import { isWindows } from '@/utils/platform'
-import { clearObject } from '@/utils/shared'
 
-const { startListening } = useDevice()
 const appWindow = getCurrentWebviewWindow()
-const { modelSize, handleLoad, handleDestroy, handleResize, handleKeyChange } = useModel()
+const { modelSize, handleLoad, handleDestroy, handleResize } = useModel()
 const catStore = useCatStore()
 const { getBaseMenu, getExitMenu } = useAppMenu()
 const modelStore = useModelStore()
 const generalStore = useGeneralStore()
 const resizing = ref(false)
 const backgroundImagePath = ref<string>()
-const { stickActive } = useGamepad()
 
-onMounted(startListening)
+onMounted(() => {
+  // 初始化完成
+})
 
 onUnmounted(handleDestroy)
 
@@ -60,29 +52,6 @@ watch(() => modelStore.currentModel, async (model) => {
 
   await handleLoad()
 
-  const path = join(model.path, 'resources', 'background.png')
-
-  const existed = await exists(path)
-
-  backgroundImagePath.value = existed ? convertFileSrc(path) : void 0
-
-  clearObject([modelStore.supportKeys, modelStore.pressedKeys])
-
-  const resourcePath = join(model.path, 'resources')
-  const groups = ['left-keys', 'right-keys']
-
-  for await (const groupName of groups) {
-    const groupDir = join(resourcePath, groupName)
-    const files = await readDir(groupDir).catch(() => [])
-    const imageFiles = files.filter(file => isImage(file.name))
-
-    for (const file of imageFiles) {
-      const fileName = file.name.split('.')[0]
-
-      modelStore.supportKeys[fileName] = join(groupDir, file.name)
-    }
-  }
-
   modelStore.modelReady = true
 }, { deep: true, immediate: true })
 
@@ -98,18 +67,6 @@ watch([() => catStore.window.scale, modelSize], async ([scale, modelSize]) => {
     }),
   )
 }, { immediate: true })
-
-watch([modelStore.pressedKeys, stickActive], ([keys, stickActive]) => {
-  const dirs = Object.values(keys).map((path) => {
-    return nth(path.split(sep()), -2)!
-  })
-
-  const hasLeft = dirs.some(dir => dir.startsWith('left'))
-  const hasRight = dirs.some(dir => dir.startsWith('right'))
-
-  handleKeyChange(true, stickActive.left || hasLeft)
-  handleKeyChange(false, stickActive.right || hasRight)
-}, { deep: true })
 
 watch(() => catStore.window.visible, async (value) => {
   value ? showWindow() : hideWindow()
@@ -179,7 +136,7 @@ function handleMouseMove(event: MouseEvent) {
 
 <template>
   <div
-    class="relative size-screen overflow-hidden children:(absolute size-full)"
+    class="relative size-screen overflow-hidden"
     :class="{ '-scale-x-100': catStore.model.mirror }"
     :style="{
       opacity: catStore.window.opacity / 100,
@@ -191,22 +148,15 @@ function handleMouseMove(event: MouseEvent) {
   >
     <img
       v-if="backgroundImagePath"
-      class="object-cover"
+      class="object-cover absolute size-full"
       :src="backgroundImagePath"
     >
 
-    <canvas id="live2dCanvas" />
-
-    <img
-      v-for="path in modelStore.pressedKeys"
-      :key="path"
-      class="object-cover"
-      :src="convertFileSrc(path)"
-    >
+    <canvas id="live2dCanvas" class="absolute size-full" />
 
     <div
       v-show="resizing || !modelStore.modelReady"
-      class="flex items-center justify-center bg-black"
+      class="absolute size-full flex items-center justify-center bg-black"
     >
       <span class="text-center text-[10vw] text-[#fff]">
         {{ resizing ? $t('pages.main.hints.redrawing') : $t('pages.main.hints.switching') }}

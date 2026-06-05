@@ -13,8 +13,7 @@
         "labels": {
           "modelSettings": "模型設定",
           "mirrorMode": "鏡像模式",
-          "mouseMirror": "滑鼠游標鏡像",
-          "ignoreMouse": "忽略滑鼠事件",
+
           "windowSettings": "視窗設定",
           "passThrough": "視窗穿透",
           "alwaysOnTop": "視窗置頂",
@@ -24,21 +23,17 @@
           "opacity": "不透明度",
           "motionSound": "動作音效",
           "behavior": "動作與表情",
-          "autoReleaseDelay": "按鍵自動釋放延遲",
           "hideOnHover": "滑鼠游標移入隱藏",
           "maxFPS": "最大幀率"
         },
         "hints": {
           "mirrorMode": "啟用後，模型將水平鏡像翻轉。",
-          "mouseMirror": "啟用後，滑鼠游標將鏡像跟隨手部移動。",
-          "ignoreMouse": "啟用後，模型將不再回應滑鼠事件，適用於鍵盤模式或手柄模式。",
           "motionSound": "啟用後，模型執行動作時會播放對應音效（如果存在）。",
           "behavior": "啟用後，可以配置和觸發模型的動作與表情。",
           "passThrough": "啟用後，視窗不影響對其他應用程式的操作。",
           "alwaysOnTop": "啟用後，視窗始終顯示在其他應用程式上方。",
           "keepInScreen": "啟用後，視窗會自動調整位置，防止超出螢幕邊界。",
           "windowSize": "將滑鼠游標移至視窗邊緣，或按住 Shift 並右鍵拖曳，也可以調整視窗大小。",
-          "autoReleaseDelay": "由於 Windows 下部份系統級按鍵無法擷取釋放事件，超時後將自動視為已釋放。",
           "hideOnHover": "啟用後，滑鼠游標懸停視窗時自動隱藏。可設定延遲時間，0 表示立即隱藏。",
           "maxFPS": "限制模型渲染的最大幀率，降低幀率可以減少 CPU/GPU 佔用。"
         }
@@ -112,23 +107,6 @@
           }
         }
       },
-      "shortcut": {
-        "title": "快速鍵",
-        "labels": {
-          "toggleCat": "開啟貓咪",
-          "togglePreferences": "開啟偏好設定",
-          "mirrorMode": "鏡像模式",
-          "passThrough": "視窗穿透",
-          "alwaysOnTop": "視窗置頂"
-        },
-        "hints": {
-          "toggleCat": "切換貓咪視窗的顯示與隱藏。",
-          "togglePreferences": "切換偏好設定視窗的顯示與隱藏。",
-          "mirrorMode": "切換貓咪的鏡像模式。",
-          "passThrough": "切換貓咪視窗是否可穿透。",
-          "alwaysOnTop": "切換貓咪視窗是否置頂。"
-        }
-      },
       "about": {
         "title": "關於",
         "labels": {
@@ -151,12 +129,6 @@
     }
   },
   "components": {
-    "shortcut": {
-      "hints": {
-        "pressRecordShortcut": "按下錄製快速鍵",
-        "clickRecordShortcut": "點擊錄製快速鍵"
-      }
-    },
     "updateApp": {
       "title": "發現新版本🥳",
       "labels": {

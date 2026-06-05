@@ -1,11 +1,7 @@
 mod core;
 mod utils;
 
-use core::{
-    device::start_device_listening,
-    gamepad::{start_gamepad_listing, stop_gamepad_listing},
-    prevent_default, setup,
-};
+use core::{prevent_default, setup};
 use tauri::{Manager, WindowEvent, generate_handler};
 use tauri_plugin_autostart::MacosLauncher;
 use tauri_plugin_custom_window::{
@@ -27,12 +23,7 @@ pub fn run() {
 
             Ok(())
         })
-        .invoke_handler(generate_handler![
-            copy_dir,
-            start_device_listening,
-            start_gamepad_listing,
-            stop_gamepad_listing
-        ])
+        .invoke_handler(generate_handler![copy_dir])
         .plugin(tauri_plugin_admin_status::init())
         .plugin(tauri_plugin_custom_window::init())
         .plugin(tauri_plugin_os::init())
@@ -49,7 +40,6 @@ pub fn run() {
         .plugin(
             tauri_plugin_log::Builder::new()
                 .timezone_strategy(tauri_plugin_log::TimezoneStrategy::UseLocal)
-                .filter(|metadata| !metadata.target().contains("gilrs"))
                 .build(),
         )
         .plugin(tauri_plugin_autostart::init(
@@ -60,7 +50,6 @@ pub fn run() {
         .plugin(tauri_plugin_dialog::init())
         .plugin(tauri_plugin_fs::init())
         .plugin(tauri_plugin_clipboard_manager::init())
-        .plugin(tauri_plugin_global_shortcut::Builder::new().build())
         .plugin(tauri_plugin_locale::init())
         .on_window_event(|window, event| match event {
             WindowEvent::CloseRequested { api, .. } => {

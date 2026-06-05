@@ -13,8 +13,7 @@
         "labels": {
           "modelSettings": "Model Settings",
           "mirrorMode": "Mirror Mode",
-          "mouseMirror": "Mouse Mirror",
-          "ignoreMouse": "Ignore Mouse Events",
+
           "windowSettings": "Window Settings",
           "passThrough": "Pass Through",
           "alwaysOnTop": "Always on Top",
@@ -24,21 +23,17 @@
           "opacity": "Opacity",
           "motionSound": "Motion Sound",
           "behavior": "Motions and Expressions",
-          "autoReleaseDelay": "Auto Release Delay",
           "hideOnHover": "Hide on Hover",
           "maxFPS": "Max Frame Rate"
         },
         "hints": {
           "mirrorMode": "When enabled, the model will be mirrored horizontally.",
-          "mouseMirror": "When enabled, the mouse will mirror the hand movement.",
-          "ignoreMouse": "When enabled, the model will not respond to mouse events. Useful for keyboard mode or gamepad mode.",
           "motionSound": "When enabled, the model will play corresponding sound effects when performing actions (if they exist).",
           "behavior": "When enabled, motions and expressions can be configured and triggered.",
           "passThrough": "When enabled, clicks pass through the window without affecting it.",
           "alwaysOnTop": "When enabled, the window stays above all other windows.",
           "keepInScreen": "When enabled, the window automatically stays within the screen boundaries.",
           "windowSize": "Move mouse to window edge, or hold Shift and right-drag to resize.",
-          "autoReleaseDelay": "On Windows, some system keys cannot capture release events and will auto-release after timeout.",
           "hideOnHover": "When enabled, the window hides automatically on mouse hover. You can set a delay; 0 means hide immediately.",
           "maxFPS": "Limit the maximum frame rate for model rendering. Lowering the frame rate can reduce CPU/GPU usage."
         }
@@ -112,23 +107,6 @@
           }
         }
       },
-      "shortcut": {
-        "title": "Shortcuts",
-        "labels": {
-          "toggleCat": "Toggle Cat",
-          "togglePreferences": "Toggle Preferences",
-          "mirrorMode": "Mirror Mode",
-          "passThrough": "Pass Through",
-          "alwaysOnTop": "Always on Top"
-        },
-        "hints": {
-          "toggleCat": "Toggle the visibility of the cat window.",
-          "togglePreferences": "Toggle the visibility of the preferences window.",
-          "mirrorMode": "Toggle the cat's mirror mode.",
-          "passThrough": "Toggle whether the cat window is pass-through.",
-          "alwaysOnTop": "Toggle whether the cat window stays on top."
-        }
-      },
       "about": {
         "title": "About",
         "labels": {
@@ -151,12 +129,6 @@
     }
   },
   "components": {
-    "shortcut": {
-      "hints": {
-        "pressRecordShortcut": "Press to record shortcut",
-        "clickRecordShortcut": "Click to record shortcut"
-      }
-    },
     "updateApp": {
       "title": "New Version Found 🥳",
       "labels": {

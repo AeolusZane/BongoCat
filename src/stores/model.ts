@@ -4,11 +4,11 @@ import { resolveResource } from '@tauri-apps/api/path'
 import { filter, find } from 'es-toolkit/compat'
 import { nanoid } from 'nanoid'
 import { defineStore } from 'pinia'
-import { reactive, ref } from 'vue'
+import { ref } from 'vue'
 
 import { join } from '@/utils/path'
 
-export type ModelMode = 'standard' | 'keyboard' | 'gamepad'
+export type ModelMode = 'standard'
 
 export interface Model {
   id: string
@@ -21,11 +21,8 @@ export const useModelStore = defineStore('model', () => {
   const modelReady = ref(true)
   const models = ref<Model[]>([])
   const currentModel = ref<Model>()
-  const supportKeys = reactive<Record<string, string>>({})
-  const pressedKeys = reactive<Record<string, string>>({})
   const currentMotions = ref<Array<[string, MotionInfo[]]>>([])
   const currentExpressions = ref<ExpressionInfo[]>([])
-  const shortcuts = reactive<Record<string, string>>({})
 
   const init = async () => {
     const modelsPath = await resolveResource('assets/models')
@@ -33,7 +30,7 @@ export const useModelStore = defineStore('model', () => {
     const nextModels = filter(models.value, { isPreset: false })
     const presetModels = filter(models.value, { isPreset: true })
 
-    const modes: ModelMode[] = ['gamepad', 'keyboard', 'standard']
+    const modes: ModelMode[] = ['standard']
 
     for (const mode of modes) {
       const matched = find(presetModels, { mode })
@@ -57,15 +54,8 @@ export const useModelStore = defineStore('model', () => {
     modelReady,
     models,
     currentModel,
-    supportKeys,
-    pressedKeys,
     currentMotions,
     currentExpressions,
-    shortcuts,
     init,
   }
-}, {
-  tauri: {
-    filterKeys: ['supportKeys', 'pressedKeys'],
-  },
 })
