@@ -1,6 +1,6 @@
 {
-  "frameWidth": 128,
-  "frameHeight": 128,
+  "frameWidth": 256,
+  "frameHeight": 256,
   "states": {
     "IDLE": {
       "file": "idle.png",
@@ -28,13 +28,13 @@
     },
     "DRAG": {
       "file": "drag.png",
-      "frames": 2,
+      "frames": 1,
       "fps": 8,
       "loop": true
     },
     "CLICK": {
       "file": "click.png",
-      "frames": 2,
+      "frames": 1,
       "fps": 8,
       "loop": false
     }

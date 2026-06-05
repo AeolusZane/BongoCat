@@ -50,18 +50,17 @@ class SpriteStateMachine {
         break
 
       case 'IDLE':
-        this.startIdleTimer()
+        // 简化版本：不自动切换到 SLEEP
+        // 未来可以恢复：this.startIdleTimer()
         break
     }
   }
 
   /** 通知有用户活动（键盘/鼠标/手柄），重置空闲计时 */
   signalActivity(): void {
-    this.resetIdleTimer()
-
-    if (this.currentState === 'SLEEP' || this.currentState === 'IDLE') {
-      this.setState('TYPING')
-    }
+    // 简化版本：暂时不响应按键，保持在 IDLE
+    // 未来可以恢复：this.resetIdleTimer() + 切换到 TYPING
+    console.log('[StateMachine] Activity signal received (ignored in simplified mode)')
   }
 
   /** 通知点击事件 */
