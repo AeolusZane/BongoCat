@@ -1,0 +1,42 @@
+{
+  "frameWidth": 128,
+  "frameHeight": 128,
+  "states": {
+    "IDLE": {
+      "file": "idle.png",
+      "frames": 3,
+      "fps": 8,
+      "loop": true
+    },
+    "TYPING": {
+      "file": "typing.png",
+      "frames": 4,
+      "fps": 12,
+      "loop": true
+    },
+    "SLEEP": {
+      "file": "sleep.png",
+      "frames": 2,
+      "fps": 4,
+      "loop": true
+    },
+    "HAPPY": {
+      "file": "happy.png",
+      "frames": 3,
+      "fps": 10,
+      "loop": false
+    },
+    "DRAG": {
+      "file": "drag.png",
+      "frames": 2,
+      "fps": 8,
+      "loop": true
+    },
+    "CLICK": {
+      "file": "click.png",
+      "frames": 2,
+      "fps": 8,
+      "loop": false
+    }
+  }
+}
